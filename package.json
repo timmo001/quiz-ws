@@ -1,0 +1,19 @@
+{
+  "name": "quiz-ws",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/timmo001/quiz-ws",
+  "author": "Timmo",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "superagent": "^3.8.3",
+    "ws": "^6.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
