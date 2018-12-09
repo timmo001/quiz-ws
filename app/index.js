@@ -8,6 +8,9 @@ module.exports = (server) => {
     ws.on('message', incoming = (message) => {
       message = JSON.parse(message);
       switch (message.request) {
+        case 'session':
+          require('./session')(ws, message, {});
+          break;
         case 'categories':
           require('./categories')(ws, message, {});
           break;
