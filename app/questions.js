@@ -1,12 +1,14 @@
 const request = require('superagent');
 
-module.exports = (ws, req) => {
+module.exports = (wss, req) => {
+  const { session, amount, category, difficulty, type } = req;
+
   request
-    .get(`https://opentdb.com/api.php?${req.amount ?
-      `amount=${req.amount}` : ''}${req.category ?
-        `&category=${req.category}` : ''}${req.difficulty ?
-          `&difficulty=${req.difficulty}` : ''}${req.type ?
-            `&type=${req.type}` : ''}`)
+    .get(`https://opentdb.com/api.php?${amount ?
+      `amount=${amount}` : ''}${category ?
+        `&category=${category}` : ''}${difficulty ?
+          `&difficulty=${difficulty}` : ''}${type ?
+            `&type=${type}` : ''}`)
     .retry(2)
     .timeout({
       response: 5000,
@@ -14,7 +16,13 @@ module.exports = (ws, req) => {
     })
     .then(res => {
       if (res.status === 200) {
-        ws.send(JSON.stringify({ request: 'questions', data: res.body.results }));
+        wss.clients.forEach(function each(client) {
+          client.send(JSON.stringify({
+            request: 'questions',
+            session, data: res.body.results
+          }));
+        });
+
       } else console.error(`Error: ${res.status}: ${res.body}`);
     })
     .catch(err => {
