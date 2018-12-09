@@ -12,13 +12,15 @@ const makeid = () => {
 module.exports = (ws, req, db) => {
   const session = makeid();
   const { amount, category, difficulty, type } = req;
-  db.addSession({
-    session, amount, category, difficulty, type
-  }, (_err, _id) =>
-      ws.send(JSON.stringify({
-        request: 'session', data: {
-          session, amount, category, difficulty, type
-        }
-      }))
+  require('./common/questions')(amount, category, difficulty, type, questions =>
+    db.addSession({
+      session, amount, category, difficulty, type, questions
+    }, (_err, _id) =>
+        ws.send(JSON.stringify({
+          request: 'session', data: {
+            session, amount, category, difficulty, type, questions
+          }
+        }))
+    )
   );
 };

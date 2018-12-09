@@ -21,6 +21,9 @@ module.exports = (server) => {
         case 'questions':
           require('./questions')(wss, message, {});
           break;
+        case 'ready':
+          require('./ready')(wss, message, {});
+          break;
       }
     });
 

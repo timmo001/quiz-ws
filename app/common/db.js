@@ -3,9 +3,10 @@ const Datastore = require('nedb');
 const db = new Datastore();
 
 const getSession = (session, cb) => {
+  console.log(`Finding session ${session}..`);
   db.findOne({ session }, (err, doc) => {
-    if (err) { cb(err); return; }
-    if (!doc) { cb(`No session found for ${id}.`); return; }
+    if (err) { cb('Error:', err); return; }
+    if (!doc) { cb(`No session found for ${session}.`); return; }
     cb(doc);
   });
 };

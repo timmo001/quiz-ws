@@ -1,5 +1,13 @@
-module.exports = (ws, req, db) => {
-  db.getSession(req.id, (_err, session) =>
-    ws.send(JSON.stringify({ request: 'join', data: session }))
-  );
+module.exports = (wss, req, db) => {
+  db.getSession(req.session.toUpperCase(), session => {
+    console.log('Session:', session);
+
+    wss.clients.forEach(function each(client) {
+      client.send(JSON.stringify({
+        request: 'join',
+        session: req.session,
+        data: session
+      }));
+    });
+  });
 };
