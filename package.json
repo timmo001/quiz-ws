@@ -10,7 +10,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "superagent": "^4.0.0",
+    "superagent": "^4.1.0",
     "uuid": "^3.3.2",
     "ws": "^6.1.2"
   },
