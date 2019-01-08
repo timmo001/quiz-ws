@@ -10,11 +10,11 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "superagent": "^4.0.0",
-    "uuid": "^3.3.2",
-    "ws": "^6.1.2"
+    "superagent": "4.0.0",
+    "uuid": "3.3.2",
+    "ws": "6.1.2"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "nodemon": "1.18.9"
   }
 }
