@@ -213,7 +213,7 @@ stages:
 # Preflight jobs
 hadolint:
   <<: *preflight
-  image: hadolint/hadolint:v1.15.0
+  image: hadolint/hadolint:v1.17.2
   before_script:
     - hadolint --version
   script:
